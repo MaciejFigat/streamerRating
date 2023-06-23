@@ -1,18 +1,21 @@
 import express from 'express'
-import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 import http from 'http'
+import connectDB from '../config/db'
 import { Server, Socket } from 'socket.io'
 import streamerRoutes from '../routes/streamerRoutes'
 import { Streamer } from '../models/streamerModel'
+import colors from 'colors'
+
+// Connect to MongoDB
+dotenv.config()
+connectDB()
 
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
 
 const PORT = 3000
-
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost/streamer-spotlight')
 
 // Middleware
 app.use(express.json())
@@ -55,5 +58,5 @@ io.on('connection', (socket: Socket) => {
 
 // Start the server
 server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
+  console.log(colors.rainbow(`Server listening on port ${PORT}`))
 })
