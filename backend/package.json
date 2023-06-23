@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "server": "nodemon --exec ts-node backend/src/server",
+    "server": "nodemon --exec ts-node src/server",
     "build": "tsc",
     "test": "set NODE_ENV=test&& jest --watchAll --no-cache",
     "test:watch": "jest --watch"
