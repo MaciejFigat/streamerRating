@@ -1,6 +1,11 @@
 import React from 'react'
+import StreamerList from '../modules/streamerList/StreamerList'
 
 const HomeScreen: React.FC = () => {
-  return <div>You are home Captain Philips</div>
+  return (
+    <>
+      <StreamerList />
+    </>
+  )
 }
 export default HomeScreen
