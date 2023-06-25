@@ -21,7 +21,7 @@ const PORT = 3000
 app.use(express.json())
 
 // Routes
-app.use(streamerRoutes)
+app.use('/streamers', streamerRoutes)
 
 // WebSocket
 io.on('connection', (socket: Socket) => {

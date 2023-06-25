@@ -48,3 +48,10 @@ export enum SvgIconVariants {
   CHECK_EMPTY = 'squareEmpty',
   COINS = 'coins'
 }
+
+export enum streamerStatus {
+  IDLE = 'idle',
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  FAILED = 'failed'
+}

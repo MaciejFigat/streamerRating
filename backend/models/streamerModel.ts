@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose'
 
 interface IStreamer extends Document {
   name: string
+  pictureUrl: string
   platform: string
   description: string
   upvotes: number
@@ -10,6 +11,7 @@ interface IStreamer extends Document {
 
 const streamerSchema = new Schema<IStreamer>({
   name: { type: String, required: true },
+  pictureUrl: { type: String, required: true },
   platform: { type: String, required: true },
   description: { type: String, required: true },
   upvotes: { type: Number, default: 0 },
