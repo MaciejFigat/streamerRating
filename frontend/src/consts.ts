@@ -55,3 +55,11 @@ export enum streamerStatus {
   SUCCESS = 'success',
   FAILED = 'failed'
 }
+
+export enum TPlatform {
+  TWITCH = 'Twitch',
+  YOUTUBE = 'YouTube',
+  TIKTOK = 'TikTok',
+  KICK = 'Kick',
+  RUMBLE = 'Rumble'
+}

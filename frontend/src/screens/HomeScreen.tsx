@@ -1,5 +1,5 @@
 import React from 'react'
-import StreamerList from '../modules/streamerList/StreamerList'
+import StreamerList from '../modules/streamers/list/StreamerList'
 
 const HomeScreen: React.FC = () => {
   return (

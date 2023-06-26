@@ -1,7 +1,6 @@
 import {
   createAsyncThunk,
   createSlice,
-  PayloadAction,
   SerializedError
 } from '@reduxjs/toolkit'
 import { IStreamer } from '../../../interfaces'
@@ -96,7 +95,7 @@ const streamerSlice = createSlice({
       .addCase(createStreamer.rejected, (state, action) => {
         const payload = action.payload as ErrorPayload
         state.status = streamerStatus.FAILED
-        state.error = payload?.error || 'Failed to fetch streamers'
+        state.error = payload?.error || 'Failed to create streamer'
       })
       .addCase(fetchAllStreamers.pending, state => {
         state.status = streamerStatus.LOADING

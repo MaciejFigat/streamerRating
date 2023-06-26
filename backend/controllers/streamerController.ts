@@ -7,14 +7,20 @@ export const createStreamer = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { name, platform, description } = req.body
+    const { name, platform, description, pictureUrl } = req.body
 
-    const newStreamer = new Streamer({ name, platform, description })
+    const newStreamer = new Streamer({
+      name,
+      platform,
+      description,
+      pictureUrl
+    })
     await newStreamer.save()
 
     res.status(201).json(newStreamer)
   } catch (error) {
     res.status(500).json({ error: 'Failed to submit streamer' })
+    console.log(error)
   }
 }
 

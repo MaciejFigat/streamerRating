@@ -1,9 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose'
+import { TPlatform } from '../consts'
 
 interface IStreamer extends Document {
   name: string
   pictureUrl: string
-  platform: string
+  platform: TPlatform
   description: string
   upvotes: number
   downvotes: number

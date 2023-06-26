@@ -1,13 +1,7 @@
 import React from 'react'
+import StreamerForm from '../modules/streamers/form/StreamerForm'
 
 const AboutScreen: React.FC = () => {
-  return (
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non eaque, quasi
-      a architecto repellendus debitis eos accusantium nesciunt, autem ut
-      incidunt laboriosam laborum omnis pariatur eveniet. Doloremque error
-      facilis eum.
-    </div>
-  )
+  return <StreamerForm />
 }
 export default AboutScreen
