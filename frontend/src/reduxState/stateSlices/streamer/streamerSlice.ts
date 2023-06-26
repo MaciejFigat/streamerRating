@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit'
 import { IStreamer } from '../../../interfaces'
 import axios from 'axios'
-import { streamerStatus } from '../../../consts'
+import { streamerStatus, VoteType } from '../../../consts'
 
 interface ErrorPayload {
   error: string
@@ -65,7 +65,7 @@ export const fetchStreamerById = createAsyncThunk(
 export const voteOnStreamer = createAsyncThunk(
   'streamer/voteOnStreamer',
   async (
-    { streamerId, voteType }: { streamerId: string; voteType: string },
+    { streamerId, voteType }: { streamerId: string; voteType: VoteType },
     thunkAPI
   ) => {
     try {

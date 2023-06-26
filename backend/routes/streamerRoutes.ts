@@ -3,14 +3,28 @@ import {
   createStreamer,
   getAllStreamers,
   getStreamerById,
-  voteOnStreamer
+  voteOnStreamerFactory
 } from '../controllers/streamerController'
 
-const router = express.Router()
+import { Server } from 'socket.io'
 
-router.post('/', createStreamer)
-router.get('/', getAllStreamers)
-router.get('/:streamerId', getStreamerById)
-router.put('/:streamerId/vote', voteOnStreamer)
+export const initRoutes = (io: Server) => {
+  const router = express.Router()
 
-export default router
+  router.post('/', createStreamer)
+  router.get('/', getAllStreamers)
+  router.get('/:streamerId', getStreamerById)
+
+  router.put('/:streamerId/vote', voteOnStreamerFactory(io))
+
+  return router
+}
+
+// export default router
+
+// const router = express.Router()
+
+// router.post('/', createStreamer)
+// router.get('/', getAllStreamers)
+// router.get('/:streamerId', getStreamerById)
+// router.put('/:streamerId/vote', voteOnStreamer)

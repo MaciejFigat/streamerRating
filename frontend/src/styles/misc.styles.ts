@@ -6,27 +6,6 @@ export const GridCenterWrapper = styled.div`
   place-items: center;
 `
 
-export const DraggingIcon = styled.span`
-  width: 20px;
-  height: 20px;
-  &:before {
-    content: '.';
-    position: relative;
-    left: 10px;
-    top: -11px;
-    font-size: 20px;
-    line-height: 20px;
-    color: var(--background-blur3);
-    text-shadow: 0 5px var(--background-blur3), 0 10px var(--background-blur3),
-      5px 0 var(--background-blur3), 5px 5px var(--background-blur3),
-      5px 10px var(--background-blur3), 10px 0 var(--background-blur3),
-      10px 5px var(--background-blur3), 10px 10px var(--background-blur3);
-  }
-  @media (max-width: 1040px) {
-    display: none;
-  }
-`
-
 export const HorizontalWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -74,7 +53,8 @@ export const GeneralWrapper = styled.div`
   place-items: center;
   width: 100%;
 
-  height: 100%;
+  /* height: 100%; */
+  height: 100vh;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 0.2em;

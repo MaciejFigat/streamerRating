@@ -63,3 +63,8 @@ export enum TPlatform {
   KICK = 'Kick',
   RUMBLE = 'Rumble'
 }
+
+export enum VoteType {
+  UPVOTE = 'upvote',
+  DOWNVOTE = 'downvote'
+}

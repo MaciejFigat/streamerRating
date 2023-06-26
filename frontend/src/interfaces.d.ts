@@ -1,6 +1,7 @@
 import { TPlatform } from './consts'
 
 interface IStreamer {
+  _id?: string
   name: string
   pictureUrl: string
   platform: TPlatform

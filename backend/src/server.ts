@@ -2,9 +2,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import http from 'http'
 import connectDB from '../config/db'
-import { Server, Socket } from 'socket.io'
-import streamerRoutes from '../routes/streamerRoutes'
-import { Streamer } from '../models/streamerModel'
+// import { Server, Socket } from 'socket.io'
+import { Server } from 'socket.io'
+// import streamerRoutes from '../routes/streamerRoutes'
+import { initRoutes } from '../routes/streamerRoutes'
+
+// import { Streamer } from '../models/streamerModel'
 import colors from 'colors'
 
 // Connect to MongoDB
@@ -13,7 +16,12 @@ connectDB()
 
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server)
+// const io = new Server(server, {
+const io = new Server({
+  cors: {
+    origin: 'http://localhost:5173'
+  }
+})
 
 const PORT = 3000
 
@@ -21,39 +29,16 @@ const PORT = 3000
 app.use(express.json())
 
 // Routes
-app.use('/api/streamers', streamerRoutes)
+// app.use('/api/streamers', streamerRoutes)
+app.use('/api/streamers', initRoutes(io))
 
-// WebSocket
-io.on('connection', (socket: Socket) => {
-  console.log('A user connected')
+const cors = require('cors')
+app.use(cors())
 
-  // Handle vote event
-  socket.on('vote', async (data: { streamerId: string; voteType: string }) => {
-    try {
-      const { streamerId, voteType } = data
-      const streamer = await Streamer.findById(streamerId)
-
-      if (!streamer) {
-        return
-      }
-
-      if (voteType === 'upvote') {
-        streamer.upvotes += 1
-      } else if (voteType === 'downvote') {
-        streamer.downvotes += 1
-      }
-
-      await streamer.save()
-      io.emit('voteUpdated', streamer)
-    } catch (error) {
-      console.error('Failed to update vote', error)
-    }
-  })
-
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('A user disconnected')
-  })
+io.listen(3001)
+io.on('connection', socket => {
+  console.log('New client connected')
+  socket.on('disconnect', () => console.log('Client disconnected'))
 })
 
 // Start the server
