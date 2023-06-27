@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import {
-  createStreamer,
-  fetchAllStreamers
-} from '../../../reduxState/stateSlices/streamer/streamerSlice'
-import socketIOClient from 'socket.io-client'
+import React, { useState } from 'react'
+import { createStreamer } from '../../../reduxState/stateSlices/streamer/streamerSlice'
 import { useAppDispatch, useAppSelector } from '../../../reduxState/reduxHooks'
 import { TPlatform, TextColor } from '../../../consts'
 import {
@@ -59,25 +55,7 @@ const StreamerForm: React.FC = () => {
       [name]: value
     }))
   }
-  const ENDPOINT = 'http://localhost:3001'
-  useEffect(() => {
-    dispatch(fetchAllStreamers())
-  }, [dispatch])
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT)
-    socket.on('connect', () => {
-      console.log('Connected to server')
-    })
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from server')
-    })
-
-    // Disconnect when the component unmounts
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
   return (
     <GeneralWrapper>
       <FormWrapper>

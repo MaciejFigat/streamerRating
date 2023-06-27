@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import socketIOClient from 'socket.io-client'
 import {
   ListDesc,
   ListItem,
@@ -15,7 +16,11 @@ import {
   HorizontalWrapperSpaceAround
 } from '../../../styles/misc.styles'
 import { TextColor, VoteType } from '../../../consts'
-import { voteOnStreamer } from '../../../reduxState/stateSlices/streamer/streamerSlice'
+import {
+  fetchAllStreamers,
+  fetchStreamerById,
+  voteOnStreamer
+} from '../../../reduxState/stateSlices/streamer/streamerSlice'
 
 const StreamerList: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -24,6 +29,38 @@ const StreamerList: React.FC = () => {
   const voteHandler = (streamerId: string, voteType: VoteType) => {
     dispatch(voteOnStreamer({ streamerId, voteType }))
   }
+  const ENDPOINT = 'http://localhost:3001'
+
+  interface IVoteEmitData {
+    streamerId: string
+    voteType: VoteType
+  }
+
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT)
+
+    socket.on('connect', () => {
+      console.log('Connected to server')
+    })
+    socket.on('vote', (data: IVoteEmitData) => {
+      console.log('Connected to server')
+      console.log(data)
+      dispatch(fetchStreamerById(data.streamerId))
+    })
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server')
+    })
+
+    // Disconnect when the component unmounts
+    return () => {
+      socket.disconnect()
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(fetchAllStreamers())
+  }, [dispatch])
 
   return (
     <StreamerColumnWrapper>

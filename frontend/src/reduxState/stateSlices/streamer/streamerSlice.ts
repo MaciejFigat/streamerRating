@@ -117,8 +117,16 @@ const streamerSlice = createSlice({
       })
       .addCase(fetchStreamerById.fulfilled, (state, action) => {
         state.status = streamerStatus.SUCCESS
-        state.streamer = action.payload
+        // state.streamer = action.payload
         state.error = null
+        state.streamers = state.streamers.map(streamer => {
+          // If the streamer id matches the fetched streamer id, replace it
+          if (streamer._id === action.payload._id) {
+            return action.payload
+          }
+          // Else, return the streamer as is
+          return streamer
+        })
       })
       .addCase(fetchStreamerById.rejected, (state, action) => {
         const payload = action.payload as ErrorPayload
