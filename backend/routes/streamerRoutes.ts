@@ -1,6 +1,6 @@
 import express from 'express'
 import {
-  createStreamer,
+  createStreamerFactory,
   getAllStreamers,
   getStreamerById,
   voteOnStreamerFactory
@@ -11,7 +11,7 @@ import { Server } from 'socket.io'
 export const initRoutes = (io: Server) => {
   const router = express.Router()
 
-  router.post('/', createStreamer)
+  router.post('/', createStreamerFactory(io))
   router.get('/', getAllStreamers)
   router.get('/:streamerId', getStreamerById)
 

@@ -1,47 +1,87 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { Streamer } from '../models/streamerModel'
 import { VoteType } from '../consts'
 import { Server } from 'socket.io'
+
 // POST /streamers
-export const createStreamer = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const { name, platform, description, pictureUrl } = req.body
+export const createStreamerFactory = (io: Server) => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const { name, platform, description, pictureUrl } = req.body
 
-    const newStreamer = new Streamer({
-      name,
-      platform,
-      description,
-      pictureUrl
-    })
-    await newStreamer.save()
+      const newStreamer = new Streamer({
+        name,
+        platform,
+        description,
+        pictureUrl
+      })
+      const createdStreamer = await newStreamer.save()
 
-    res.status(201).json(newStreamer)
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to submit streamer' })
-    console.log(error)
+      // Emit a 'createStreamer' event to all clients with the new streamer's ID
+      io.sockets.emit('createStreamer', {
+        // .toString() - change ObjectId - a class used by Mongoose for MongoDB document IDs
+        streamerId: createdStreamer._id.toString()
+      })
+      console.log('createStreamer', {
+        streamerId: createdStreamer._id.toString()
+      })
+
+      res.status(201).json(newStreamer)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to submit streamer' })
+      console.log(error)
+      next(error)
+    }
   }
 }
+// export const createStreamer = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const { name, platform, description, pictureUrl } = req.body
+
+//     const newStreamer = new Streamer({
+//       name,
+//       platform,
+//       description,
+//       pictureUrl
+//     })
+//     await newStreamer.save()
+
+//     res.status(201).json(newStreamer)
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to submit streamer' })
+//     console.log(error)
+//     next(error)
+//   }
+// }
 
 // GET /streamers
 export const getAllStreamers = async (
   _req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const streamers = await Streamer.find()
     res.json(streamers)
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch streamers' })
+    next(error)
   }
 }
 
 // GET /streamers/:streamerId
 export const getStreamerById = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const streamer = await Streamer.findById(req.params.streamerId)
@@ -52,12 +92,17 @@ export const getStreamerById = async (
     res.json(streamer)
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch streamer' })
+    next(error)
   }
 }
 
 // PUT /streamers/[streamerId]/vote
 export const voteOnStreamerFactory = (io: Server) => {
-  return async (req: Request, res: Response): Promise<void> => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const streamerId = req.params.streamerId
       const { voteType } = req.body
@@ -83,6 +128,7 @@ export const voteOnStreamerFactory = (io: Server) => {
       res.json(streamer)
     } catch (error) {
       res.status(500).json({ error: 'Failed to vote on streamer' })
+      next(error)
     }
   }
 }

@@ -42,12 +42,17 @@ const StreamerList: React.FC = () => {
     socket.on('connect', () => {
       console.log('Connected to server')
     })
+
     socket.on('vote', (data: IVoteEmitData) => {
       console.log('Connected to server')
       console.log(data)
       dispatch(fetchStreamerById(data.streamerId))
     })
-
+    socket.on('createStreamer', (data: { streamerId: string }) => {
+      console.log('New streamer created!', data)
+      // Dispatch fetchStreamerById with the new streamer's ID
+      dispatch(fetchStreamerById(data.streamerId))
+    })
     socket.on('disconnect', () => {
       console.log('Disconnected from server')
     })
@@ -65,6 +70,7 @@ const StreamerList: React.FC = () => {
   return (
     <StreamerColumnWrapper>
       {' '}
+      <h2>Express your love/hate, with no limit</h2>
       {streamers.map(streamer => (
         <ListWrapper key={streamer._id}>
           <ListItem>

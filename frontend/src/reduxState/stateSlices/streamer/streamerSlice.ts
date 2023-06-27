@@ -117,16 +117,19 @@ const streamerSlice = createSlice({
       })
       .addCase(fetchStreamerById.fulfilled, (state, action) => {
         state.status = streamerStatus.SUCCESS
-        // state.streamer = action.payload
         state.error = null
-        state.streamers = state.streamers.map(streamer => {
-          // If the streamer id matches the fetched streamer id, replace it
-          if (streamer._id === action.payload._id) {
-            return action.payload
-          }
-          // Else, return the streamer as is
-          return streamer
-        })
+
+        const streamerIndex = state.streamers.findIndex(
+          streamer => streamer._id === action.payload._id
+        )
+
+        if (streamerIndex !== -1) {
+          // If the streamer exists in the array, replace it
+          state.streamers[streamerIndex] = action.payload
+        } else {
+          // If the streamer does not exist, add it
+          state.streamers.push(action.payload)
+        }
       })
       .addCase(fetchStreamerById.rejected, (state, action) => {
         const payload = action.payload as ErrorPayload
