@@ -11,13 +11,14 @@ export const createStreamerFactory = (io: Server) => {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { name, platform, description, pictureUrl } = req.body
+      const { name, platform, description, pictureUrl, createdBy } = req.body
 
       const newStreamer = new Streamer({
         name,
         platform,
         description,
-        pictureUrl
+        pictureUrl,
+        createdBy
       })
       const createdStreamer = await newStreamer.save()
 
@@ -38,29 +39,6 @@ export const createStreamerFactory = (io: Server) => {
     }
   }
 }
-// export const createStreamer = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   try {
-//     const { name, platform, description, pictureUrl } = req.body
-
-//     const newStreamer = new Streamer({
-//       name,
-//       platform,
-//       description,
-//       pictureUrl
-//     })
-//     await newStreamer.save()
-
-//     res.status(201).json(newStreamer)
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to submit streamer' })
-//     console.log(error)
-//     next(error)
-//   }
-// }
 
 // GET /streamers
 export const getAllStreamers = async (
@@ -105,7 +83,7 @@ export const voteOnStreamerFactory = (io: Server) => {
   ): Promise<void> => {
     try {
       const streamerId = req.params.streamerId
-      const { voteType } = req.body
+      const { voteType, userId } = req.body
 
       const streamer = await Streamer.findById(streamerId)
       if (!streamer) {
@@ -113,11 +91,74 @@ export const voteOnStreamerFactory = (io: Server) => {
         return
       }
 
-      if (voteType === VoteType.UPVOTE) {
-        streamer.upvotes++
-      } else if (voteType === VoteType.DOWNVOTE) {
-        streamer.downvotes++
+      const alreadyUpvoted = streamer.upvotedBy.includes(userId)
+      const alreadyDownvoted = streamer.downvotedBy.includes(userId)
+
+      const addToVotes = (
+        type: 'upvotes' | 'downvotes',
+        voters: 'upvotedBy' | 'downvotedBy'
+      ) => {
+        streamer[type]++
+        streamer[voters].push(userId)
       }
+
+      const removeFromVotes = (
+        type: 'upvotes' | 'downvotes',
+        voters: 'upvotedBy' | 'downvotedBy'
+      ) => {
+        streamer[type]--
+        streamer[voters] = streamer[voters].filter(id => id !== userId)
+      }
+
+      if (voteType === VoteType.UPVOTE) {
+        if (alreadyUpvoted) {
+          removeFromVotes('upvotes', 'upvotedBy')
+        } else {
+          addToVotes('upvotes', 'upvotedBy')
+          if (alreadyDownvoted) {
+            removeFromVotes('downvotes', 'downvotedBy')
+          }
+        }
+      } else if (voteType === VoteType.DOWNVOTE) {
+        if (alreadyDownvoted) {
+          removeFromVotes('downvotes', 'downvotedBy')
+        } else {
+          addToVotes('downvotes', 'downvotedBy')
+          if (alreadyUpvoted) {
+            removeFromVotes('upvotes', 'upvotedBy')
+          }
+        }
+      }
+
+      // if (voteType === VoteType.UPVOTE) {
+      //   if (alreadyUpvoted) {
+      //     streamer.upvotes--
+      //     streamer.upvotedBy = streamer.upvotedBy.filter(id => id !== userId)
+      //   } else {
+      //     streamer.upvotes++
+      //     streamer.upvotedBy.push(userId)
+      //     if (alreadyDownvoted) {
+      //       streamer.downvotes--
+      //       streamer.downvotedBy = streamer.downvotedBy.filter(
+      //         id => id !== userId
+      //       )
+      //     }
+      //   }
+      // } else if (voteType === VoteType.DOWNVOTE) {
+      //   if (alreadyDownvoted) {
+      //     streamer.downvotes--
+      //     streamer.downvotedBy = streamer.downvotedBy.filter(
+      //       id => id !== userId
+      //     )
+      //   } else {
+      //     streamer.downvotes++
+      //     streamer.downvotedBy.push(userId)
+      //     if (alreadyUpvoted) {
+      //       streamer.upvotes--
+      //       streamer.upvotedBy = streamer.upvotedBy.filter(id => id !== userId)
+      //     }
+      //   }
+      // }
 
       await streamer.save()
 
@@ -132,30 +173,3 @@ export const voteOnStreamerFactory = (io: Server) => {
     }
   }
 }
-// export const voteOnStreamer = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   try {
-//     const streamerId = req.params.streamerId
-//     const { voteType } = req.body
-
-//     const streamer = await Streamer.findById(streamerId)
-//     if (!streamer) {
-//       res.status(404).json({ error: 'Streamer not found' })
-//       return
-//     }
-
-//     if (voteType === VoteType.UPVOTE) {
-//       streamer.upvotes++
-//     } else if (voteType === VoteType.DOWNVOTE) {
-//       streamer.downvotes++
-//     }
-
-//     await streamer.save()
-
-//     res.json(streamer)
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to vote on streamer' })
-//   }
-// }

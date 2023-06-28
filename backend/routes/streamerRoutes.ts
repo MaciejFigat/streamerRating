@@ -19,12 +19,3 @@ export const initRoutes = (io: Server) => {
 
   return router
 }
-
-// export default router
-
-// const router = express.Router()
-
-// router.post('/', createStreamer)
-// router.get('/', getAllStreamers)
-// router.get('/:streamerId', getStreamerById)
-// router.put('/:streamerId/vote', voteOnStreamer)

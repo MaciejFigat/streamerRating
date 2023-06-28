@@ -19,16 +19,15 @@ import {
   FormSelectOption
 } from './streamerForm.styled'
 import DirectionalButton from '../../../components/DirectionalButton/DirectionalButton'
-
-interface IStreamerForm {
-  name: string
-  pictureUrl: string
-  platform: TPlatform
-  description: string
-}
+import { IStreamer } from '../../../interfaces'
 
 const StreamerForm: React.FC = () => {
-  const [formData, setFormData] = useState<IStreamerForm>({
+  //TODO Mock userID
+  const userId = 'userIdMock'
+
+  const [formData, setFormData] = useState<
+    Omit<IStreamer, 'upvotes' | 'downvotes' | 'createdBy'>
+  >({
     name: '',
     pictureUrl: '',
     platform: TPlatform.TWITCH,
@@ -41,7 +40,7 @@ const StreamerForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    dispatch(createStreamer(formData))
+    dispatch(createStreamer({ ...formData, createdBy: userId }))
   }
 
   const handleChange = (

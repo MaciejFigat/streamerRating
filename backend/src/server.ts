@@ -2,13 +2,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 import http from 'http'
 import connectDB from '../config/db'
-// import { Server, Socket } from 'socket.io'
 import { Server } from 'socket.io'
-// import streamerRoutes from '../routes/streamerRoutes'
 import { initRoutes } from '../routes/streamerRoutes'
-
-// import { Streamer } from '../models/streamerModel'
 import colors from 'colors'
+import cors from 'cors'
 
 // Connect to MongoDB
 dotenv.config()
@@ -16,7 +13,7 @@ connectDB()
 
 const app = express()
 const server = http.createServer(app)
-// const io = new Server(server, {
+
 const io = new Server({
   cors: {
     origin: 'http://localhost:5173'
@@ -29,10 +26,9 @@ const PORT = 3000
 app.use(express.json())
 
 // Routes
-// app.use('/api/streamers', streamerRoutes)
-app.use('/api/streamers', initRoutes(io))
 
-const cors = require('cors')
+app.use('/streamers', initRoutes(io))
+
 app.use(cors())
 
 io.listen(3001)

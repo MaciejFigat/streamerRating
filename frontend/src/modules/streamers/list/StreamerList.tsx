@@ -26,8 +26,11 @@ const StreamerList: React.FC = () => {
   const dispatch = useAppDispatch()
   const streamers = useAppSelector(state => state.streamerState.streamers)
 
+  //TODO Mock userID
+  const userId = 'userIdMock'
+
   const voteHandler = (streamerId: string, voteType: VoteType) => {
-    dispatch(voteOnStreamer({ streamerId, voteType }))
+    dispatch(voteOnStreamer({ streamerId, voteType, userId }))
   }
   const ENDPOINT = 'http://localhost:3001'
 

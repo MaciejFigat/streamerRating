@@ -8,6 +8,7 @@ interface IStreamer {
   description: string
   upvotes: number
   downvotes: number
+  createdBy: string
 }
 
 export { IStreamer }

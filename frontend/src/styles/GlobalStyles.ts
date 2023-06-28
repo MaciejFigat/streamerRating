@@ -39,12 +39,18 @@ const GlobalStyle = createGlobalStyle`
    :root{
      margin: 0 auto;
      
+     /* --background1-main: #0C0D0F;  */
+     /* --background2-main: #14171A;  */
+     /* --background3-main: #21272B;  */
+     /* --background4-main: #F0F3F8;  */
+     /* --background5-main: #38ADFF;  */
      --background0-main: #162740; 
-     --background1-main: #0C0D0F; 
-     --background2-main: #14171A; 
-     --background3-main: #21272B; 
-     --background4-main: #F0F3F8; 
-     --background5-main: #38ADFF; 
+     --background1-main: #1d0a26; 
+     --background2-main: #302c3a; 
+     /* --background3-main: #4c1d95;  */
+     --background3-main: #6d28d9; 
+     --background4-main: #fff; 
+     --background5-main: #ddd6fe; 
      
      --background-secondary1: #43ADFF; 
      --background-secondary2: #6696F2; 
