@@ -76,7 +76,7 @@ const StreamerList: React.FC = () => {
   }, [dispatch, userId])
 
   function userHasCreated (streamer: IStreamer, userId: string): boolean {
-    return streamer.createdBy.includes(userId)
+    return streamer.createdBy === userId
   }
   function userHasUpvoted (streamer: IStreamer, userId: string): boolean {
     return streamer.upvotedBy?.includes(userId) ?? false

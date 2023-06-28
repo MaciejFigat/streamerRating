@@ -20,10 +20,9 @@ export const ListItem = styled(motion.div)<{ $isActive: boolean }>`
   padding: 0.75rem 1rem;
   margin: 0;
   border-radius: var(--border-radius1);
-
   border: 1px solid
     ${({ $isActive }) =>
-      $isActive ? 'var(--background-blur2)' : 'var(--background-secondary2)'};
+      $isActive ? 'var(--background-secondary2)' : 'var(--background-blur2)'};
 `
 export const ListContentWrapper = styled.div`
   display: flex;
