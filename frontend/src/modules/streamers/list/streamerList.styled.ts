@@ -11,18 +11,19 @@ export const ListWrapper = styled(motion.div)`
   align-items: center;
   justify-content: center;
 `
-export const ListItem = styled(motion.div)`
+export const ListItem = styled(motion.div)<{ $isActive: boolean }>`
   display: grid;
   place-items: space-around;
-
   min-height: fit-content;
-
   min-width: 318px;
   min-height: 376px;
   padding: 0.75rem 1rem;
   margin: 0;
   border-radius: var(--border-radius1);
-  border: 1px solid var(--background-blur2);
+
+  border: 1px solid
+    ${({ $isActive }) =>
+      $isActive ? 'var(--background-blur2)' : 'var(--background-secondary2)'};
 `
 export const ListContentWrapper = styled.div`
   display: flex;
@@ -52,13 +53,16 @@ export const ListDesc = styled.p`
   font-weight: 500;
   margin: 0;
 `
-export const VoteButton = styled.button`
+export const VoteButton = styled.button<{ $isActive: boolean }>`
   display: grid;
   cursor: pointer;
   place-items: center;
   height: 38px;
   width: 38px;
-  background: var(--background-blur1);
+  background: ${({ $isActive }) =>
+    $isActive ? 'var(--background-secondary2)' : 'var(--background-blur1)'};
+  color: ${({ $isActive }) =>
+    $isActive ? 'var(--background1-main)' : 'var(--background4-main)'};
   border-radius: 50%;
   transition: background-color 200ms border-color 150ms;
   border: 1px solid var(--background-blur1);

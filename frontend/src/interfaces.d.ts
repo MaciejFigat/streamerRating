@@ -7,6 +7,8 @@ interface IStreamer {
   platform: TPlatform
   description: string
   upvotes: number
+  upvotedBy?: string[]
+  downvotedBy?: string[]
   downvotes: number
   createdBy: string
 }

@@ -21,18 +21,18 @@ import {
   fetchStreamerById,
   voteOnStreamer
 } from '../../../reduxState/stateSlices/streamer/streamerSlice'
+import { setUserId } from '../../../reduxState/stateSlices/user/userSlice'
+import { nanoid } from '@reduxjs/toolkit'
+import { IStreamer } from '../../../interfaces'
 
 const StreamerList: React.FC = () => {
   const dispatch = useAppDispatch()
   const streamers = useAppSelector(state => state.streamerState.streamers)
-
-  //TODO Mock userID
-  const userId = 'userIdMock'
+  const userId = useAppSelector(state => state.user.userId)
 
   const voteHandler = (streamerId: string, voteType: VoteType) => {
     dispatch(voteOnStreamer({ streamerId, voteType, userId }))
   }
-  const ENDPOINT = 'http://localhost:3001'
 
   interface IVoteEmitData {
     streamerId: string
@@ -40,8 +40,8 @@ const StreamerList: React.FC = () => {
   }
 
   useEffect(() => {
+    const ENDPOINT = import.meta.env.VITE_ENDPOINT
     const socket = socketIOClient(ENDPOINT)
-
     socket.on('connect', () => {
       console.log('Connected to server')
     })
@@ -53,7 +53,7 @@ const StreamerList: React.FC = () => {
     })
     socket.on('createStreamer', (data: { streamerId: string }) => {
       console.log('New streamer created!', data)
-      // Dispatch fetchStreamerById with the new streamer's ID
+
       dispatch(fetchStreamerById(data.streamerId))
     })
     socket.on('disconnect', () => {
@@ -70,22 +70,36 @@ const StreamerList: React.FC = () => {
     dispatch(fetchAllStreamers())
   }, [dispatch])
 
+  //* Mock userID
+  useEffect(() => {
+    if (userId === '') dispatch(setUserId(nanoid()))
+  }, [dispatch, userId])
+
+  function userHasCreated (streamer: IStreamer, userId: string): boolean {
+    return streamer.createdBy.includes(userId)
+  }
+  function userHasUpvoted (streamer: IStreamer, userId: string): boolean {
+    return streamer.upvotedBy?.includes(userId) ?? false
+  }
+  function userHasDownvoted (streamer: IStreamer, userId: string): boolean {
+    return streamer.downvotedBy?.includes(userId) ?? false
+  }
   return (
     <StreamerColumnWrapper>
       {' '}
-      <h2>Express your love/hate, with no limit</h2>
       {streamers.map(streamer => (
         <ListWrapper key={streamer._id}>
-          <ListItem>
+          <ListItem $isActive={userHasCreated(streamer, userId)}>
             <ListContentWrapper>
               <HorizontalLineBottom />
               <ListPar>Name: {streamer.name}</ListPar>{' '}
-              <ListDesc>Desc:{streamer.description}</ListDesc>
+              <ListDesc>Desc: {streamer.description}</ListDesc>
               <HorizontalLineBottom />
               <HorizontalWrapperSpaceAround>
                 <HighlightText color={TextColor.SUCCESS}>
                   {' '}
                   <VoteButton
+                    $isActive={userHasUpvoted(streamer, userId)}
                     onClick={() =>
                       voteHandler(streamer._id ?? '', VoteType.UPVOTE)
                     }
@@ -98,6 +112,7 @@ const StreamerList: React.FC = () => {
                 <HighlightText color={TextColor.WARNING}>
                   {' '}
                   <VoteButton
+                    $isActive={userHasDownvoted(streamer, userId)}
                     onClick={() =>
                       voteHandler(streamer._id ?? '', VoteType.DOWNVOTE)
                     }

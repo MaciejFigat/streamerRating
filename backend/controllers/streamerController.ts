@@ -130,36 +130,6 @@ export const voteOnStreamerFactory = (io: Server) => {
         }
       }
 
-      // if (voteType === VoteType.UPVOTE) {
-      //   if (alreadyUpvoted) {
-      //     streamer.upvotes--
-      //     streamer.upvotedBy = streamer.upvotedBy.filter(id => id !== userId)
-      //   } else {
-      //     streamer.upvotes++
-      //     streamer.upvotedBy.push(userId)
-      //     if (alreadyDownvoted) {
-      //       streamer.downvotes--
-      //       streamer.downvotedBy = streamer.downvotedBy.filter(
-      //         id => id !== userId
-      //       )
-      //     }
-      //   }
-      // } else if (voteType === VoteType.DOWNVOTE) {
-      //   if (alreadyDownvoted) {
-      //     streamer.downvotes--
-      //     streamer.downvotedBy = streamer.downvotedBy.filter(
-      //       id => id !== userId
-      //     )
-      //   } else {
-      //     streamer.downvotes++
-      //     streamer.downvotedBy.push(userId)
-      //     if (alreadyUpvoted) {
-      //       streamer.upvotes--
-      //       streamer.upvotedBy = streamer.upvotedBy.filter(id => id !== userId)
-      //     }
-      //   }
-      // }
-
       await streamer.save()
 
       // Emit a 'vote' event to all clients

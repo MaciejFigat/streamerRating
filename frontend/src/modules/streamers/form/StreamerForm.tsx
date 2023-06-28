@@ -22,9 +22,6 @@ import DirectionalButton from '../../../components/DirectionalButton/Directional
 import { IStreamer } from '../../../interfaces'
 
 const StreamerForm: React.FC = () => {
-  //TODO Mock userID
-  const userId = 'userIdMock'
-
   const [formData, setFormData] = useState<
     Omit<IStreamer, 'upvotes' | 'downvotes' | 'createdBy'>
   >({
@@ -33,6 +30,9 @@ const StreamerForm: React.FC = () => {
     platform: TPlatform.TWITCH,
     description: ''
   })
+
+  const userId = useAppSelector(state => state.user.userId)
+
   //   https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png
   const dispatch = useAppDispatch()
   const streamer = useAppSelector(state => state.streamerState)
