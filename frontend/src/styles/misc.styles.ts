@@ -1,9 +1,24 @@
 import styled from 'styled-components'
 import { TextColor } from '../consts'
 
-export const GridCenterWrapper = styled.div`
+export const CenterWrapper = styled.div`
   display: grid;
   place-items: center;
+  /* padding: 4rem 0; */
+`
+export const GridWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 100%;
+  margin: 0px;
+  max-width: 1400px;
+  overflow: hidden;
+  @media (max-width: 1040px) {
+    display: none;
+  }
 `
 
 export const HorizontalWrapper = styled.div`
@@ -24,9 +39,9 @@ export const HorizontalLineBottom = styled.div`
   padding-bottom: var(--gap-medium);
   border-bottom: 1px solid var(--background-blur1);
 `
-export const HorizontalLineBottomLight = styled(HorizontalLineBottom)`
-  border-bottom: 1px solid var(--background-blur0);
-`
+// export const HorizontalLineBottomLight = styled(HorizontalLineBottom)`
+//   border-bottom: 1px solid var(--background-blur0);
+// `
 export const HorizontalWrapperSpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
@@ -47,13 +62,13 @@ export const RelativeWrapper = styled.div<{ top?: string; left?: string }>`
 export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  padding-top: 2rem;
 `
 export const GeneralWrapper = styled.div`
   display: grid;
   place-items: center;
   width: 100%;
 
-  /* height: 100%; */
   height: 100vh;
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -91,30 +106,30 @@ export const HorizontalWrapperSpaceAround = styled(
 )`
   justify-content: space-around;
 `
-export const HorizontalWrapperCenter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-`
-export const HorizontalWrapperEnd = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-direction: row;
-  gap: var(--gap-small);
-`
-export const BoldText = styled.b`
-  color: var(--background-secondary1);
-  font-weight: 700;
-  font-size: var(--font-size-medium);
-  @media (max-width: 610px) {
-    font-size: var(--font-size-small);
-  }
-`
-export const MarginRightBig = styled.div`
-  margin-right: var(--gap-big);
-`
+// export const HorizontalWrapperCenter = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: row;
+// `
+// export const HorizontalWrapperEnd = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+//   flex-direction: row;
+//   gap: var(--gap-small);
+// `
+// export const BoldText = styled.b`
+//   color: var(--background-secondary1);
+//   font-weight: 700;
+//   font-size: var(--font-size-medium);
+//   @media (max-width: 610px) {
+//     font-size: var(--font-size-small);
+//   }
+// `
+// export const MarginRightBig = styled.div`
+//   margin-right: var(--gap-big);
+// `
 
 interface TextProps {
   color: TextColor
@@ -157,46 +172,46 @@ const getAccentColor = (color: TextColor): string => {
   }
 }
 
-export const ColorText = styled.span<TextProps>`
-  color: ${({ color }) => getColor(color)};
-  font-weight: 600;
-`
-export const ColorBadge = styled.span<TextProps>`
-  display: grid;
-  place-items: center;
-  width: 55px;
-  letter-spacing: 0.075em;
-  padding: var(--padding-small);
-  font-size: var(--font-size-small);
-  font-weight: 800;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem;
-  background-color: ${({ color }) => getColor(color)};
-  color: var(--background4-main);
-  @media (max-width: 610px) {
-    font-size: var(--font-size-verySmall);
-    padding: var(--padding-verySmall);
-  }
-  @media (max-width: 360px) {
-    padding: 3px;
-    width: 40px;
-  }
-`
-export const ColorBadgeEmpty = styled(ColorBadge)<TextProps>`
-  background-color: var(--background1-main);
-  border: 1px solid ${({ color }) => getColor(color)};
-  color: ${({ color }) => getColor(color)};
-  &:hover {
-    border-color: ${({ color }) => getAccentColor(color)};
-    color: ${({ color }) => getAccentColor(color)};
-  }
-`
-export const ColorBadgeLong = styled(ColorBadge)<TextProps>`
-  width: fit-content;
-`
+// export const ColorText = styled.span<TextProps>`
+//   color: ${({ color }) => getColor(color)};
+//   font-weight: 600;
+// `
+// export const ColorBadge = styled.span<TextProps>`
+//   display: grid;
+//   place-items: center;
+//   width: 55px;
+//   letter-spacing: 0.075em;
+//   padding: var(--padding-small);
+//   font-size: var(--font-size-small);
+//   font-weight: 800;
+//   line-height: 1;
+//   text-align: center;
+//   white-space: nowrap;
+//   vertical-align: baseline;
+//   border-radius: 0.25rem;
+//   background-color: ${({ color }) => getColor(color)};
+//   color: var(--background4-main);
+//   @media (max-width: 610px) {
+//     font-size: var(--font-size-verySmall);
+//     padding: var(--padding-verySmall);
+//   }
+//   @media (max-width: 360px) {
+//     padding: 3px;
+//     width: 40px;
+//   }
+// `
+// export const ColorBadgeEmpty = styled(ColorBadge)<TextProps>`
+//   background-color: var(--background1-main);
+//   border: 1px solid ${({ color }) => getColor(color)};
+//   color: ${({ color }) => getColor(color)};
+//   &:hover {
+//     border-color: ${({ color }) => getAccentColor(color)};
+//     color: ${({ color }) => getAccentColor(color)};
+//   }
+// `
+// export const ColorBadgeLong = styled(ColorBadge)<TextProps>`
+//   width: fit-content;
+// `
 interface HighlightTextProps extends TextProps {
   hoverEffect?: boolean
 }
@@ -217,48 +232,48 @@ interface HoverColorWrapperProps extends TextProps {
   contentTop?: string
   contentLeft?: string
 }
-export const HoverColorWrapper = styled.div<HoverColorWrapperProps>`
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  color: ${({ color }) => getColor(color)};
-  width: 20px;
-  height: 20px;
-  &:hover {
-    color: ${({ color }) => getAccentColor(color)};
-    &:after {
-      opacity: 1;
-    }
-  }
-  &:after {
-    position: relative;
-    pointer-events: none;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--background-blur3);
-    content: ${({ contentAfter }) => (contentAfter ? `'${contentAfter}'` : '')};
-    min-width: ${({ contentWidth }) =>
-      contentWidth ? contentWidth : 'fit-content'};
-    padding: var(--gap-small);
-    top: ${({ contentTop }) => (contentTop ? contentTop : '-37px')};
-    left: ${({ contentLeft }) => (contentLeft ? contentLeft : '-37px')};
-    line-height: 1.2;
-    padding: var(--gap-small);
-    transition: all 0.2s ease-in;
-    background: var(--background2-main);
-    border-radius: var(--border-radius0);
-    opacity: 0;
-    padding-right: var(--gap-medium);
-    font-size: var(--font-size-verySmall);
-    font-weight: 400;
-    color: var(--background-blur3);
+// export const HoverColorWrapper = styled.div<HoverColorWrapperProps>`
+//   cursor: pointer;
+//   transition: all 0.2s ease-in-out;
+//   color: ${({ color }) => getColor(color)};
+//   width: 20px;
+//   height: 20px;
+//   &:hover {
+//     color: ${({ color }) => getAccentColor(color)};
+//     &:after {
+//       opacity: 1;
+//     }
+//   }
+//   &:after {
+//     position: relative;
+//     pointer-events: none;
+//     display: grid;
+//     place-items: center;
+//     border: 1px solid var(--background-blur3);
+//     content: ${({ contentAfter }) => (contentAfter ? `'${contentAfter}'` : '')};
+//     min-width: ${({ contentWidth }) =>
+//       contentWidth ? contentWidth : 'fit-content'};
+//     padding: var(--gap-small);
+//     top: ${({ contentTop }) => (contentTop ? contentTop : '-37px')};
+//     left: ${({ contentLeft }) => (contentLeft ? contentLeft : '-37px')};
+//     line-height: 1.2;
+//     padding: var(--gap-small);
+//     transition: all 0.2s ease-in;
+//     background: var(--background2-main);
+//     border-radius: var(--border-radius0);
+//     opacity: 0;
+//     padding-right: var(--gap-medium);
+//     font-size: var(--font-size-verySmall);
+//     font-weight: 400;
+//     color: var(--background-blur3);
 
-    @media (max-width: 1040px) {
-      left: -110px;
-    }
-  }
-  @media (max-width: 610px) {
-    position: relative;
-    top: 6px;
-    left: -12px;
-  }
-`
+//     @media (max-width: 1040px) {
+//       left: -110px;
+//     }
+//   }
+//   @media (max-width: 610px) {
+//     position: relative;
+//     top: 6px;
+//     left: -12px;
+//   }
+// `

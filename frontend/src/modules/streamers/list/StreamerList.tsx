@@ -7,7 +7,9 @@ import {
   ListPar,
   ListWrapper,
   StreamerColumnWrapper,
-  VoteButton
+  VoteButton,
+  ListItemNav,
+  DropDownHeaderMisc
 } from './streamerList.styled'
 import { useAppDispatch, useAppSelector } from '../../../reduxState/reduxHooks'
 import {
@@ -24,6 +26,7 @@ import {
 import { setUserId } from '../../../reduxState/stateSlices/user/userSlice'
 import { nanoid } from '@reduxjs/toolkit'
 import { IStreamer } from '../../../interfaces'
+import { NavLink } from 'react-router-dom'
 
 const StreamerList: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -88,43 +91,46 @@ const StreamerList: React.FC = () => {
     <StreamerColumnWrapper>
       {' '}
       {streamers.map(streamer => (
-        <ListWrapper key={streamer._id}>
-          <ListItem $isActive={userHasCreated(streamer, userId)}>
-            <ListContentWrapper>
-              <HorizontalLineBottom />
-              <ListPar>Name: {streamer.name}</ListPar>{' '}
-              <ListDesc>Desc: {streamer.description}</ListDesc>
-              <HorizontalLineBottom />
-              <HorizontalWrapperSpaceAround>
-                <HighlightText color={TextColor.SUCCESS}>
-                  {' '}
-                  <VoteButton
-                    $isActive={userHasUpvoted(streamer, userId)}
-                    onClick={() =>
-                      voteHandler(streamer._id ?? '', VoteType.UPVOTE)
-                    }
-                  >
-                    U
-                  </VoteButton>
-                  &nbsp;{streamer.upvotes}
-                </HighlightText>
+        <ListItem
+          key={streamer._id}
+          $isActive={userHasCreated(streamer, userId)}
+        >
+          <ListContentWrapper>
+            <ListPar>{streamer.name}</ListPar> <HorizontalLineBottom />
+            <HorizontalWrapperSpaceAround>
+              <ListItemNav>
+                <NavLink to={`/details/${streamer._id}`}>
+                  <DropDownHeaderMisc>Details</DropDownHeaderMisc>
+                </NavLink>
+              </ListItemNav>
+              <HighlightText color={TextColor.SUCCESS}>
+                {' '}
+                <VoteButton
+                  $isActive={userHasUpvoted(streamer, userId)}
+                  onClick={() =>
+                    voteHandler(streamer._id ?? '', VoteType.UPVOTE)
+                  }
+                >
+                  U
+                </VoteButton>
+                &nbsp;{streamer.upvotes}
+              </HighlightText>
 
-                <HighlightText color={TextColor.WARNING}>
-                  {' '}
-                  <VoteButton
-                    $isActive={userHasDownvoted(streamer, userId)}
-                    onClick={() =>
-                      voteHandler(streamer._id ?? '', VoteType.DOWNVOTE)
-                    }
-                  >
-                    D
-                  </VoteButton>
-                  &nbsp;{streamer.downvotes}
-                </HighlightText>
-              </HorizontalWrapperSpaceAround>
-            </ListContentWrapper>
-          </ListItem>
-        </ListWrapper>
+              <HighlightText color={TextColor.WARNING}>
+                {' '}
+                <VoteButton
+                  $isActive={userHasDownvoted(streamer, userId)}
+                  onClick={() =>
+                    voteHandler(streamer._id ?? '', VoteType.DOWNVOTE)
+                  }
+                >
+                  D
+                </VoteButton>
+                &nbsp;{streamer.downvotes}
+              </HighlightText>
+            </HorizontalWrapperSpaceAround>
+          </ListContentWrapper>
+        </ListItem>
       ))}{' '}
     </StreamerColumnWrapper>
   )

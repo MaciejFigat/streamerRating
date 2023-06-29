@@ -9,7 +9,7 @@ export const FormWrapper = styled.div`
   height: 690px;
   padding: var(--gap-huge);
   border-radius: 10px;
-  background: var(--background-gradient1);
+  /* background: var(--background-gradient1); */
   @media screen and (max-width: 960px) {
     max-width: 100%;
     width: 100%;

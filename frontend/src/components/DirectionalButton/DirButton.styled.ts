@@ -1,18 +1,19 @@
 import styled from 'styled-components'
 export const DirButton = styled.button`
   position: relative;
-  border: 1px solid var(--background3-main);
+  border: 1px solid var(--background-blur1);
   color: var(--background4-main);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 0.75rem 3rem;
-  border-radius: var(--border-radius2);
-  background: var(--background2-main);
+  border-radius: var(--border-radius1);
+
+  background: transparent;
   font-size: var(--font-size-big);
   font-weight: 600;
-  transition: background-color 500ms;
+  transition: color 300ms;
   overflow: hidden;
   /* new stacking context  */
   isolation: isolate;
@@ -20,19 +21,10 @@ export const DirButton = styled.button`
     transition: color 250ms;
     color: var(--background4-main);
   }
-  &:hover {
-    a {
-      color: var(--background-secondary1);
-    }
-  }
-  &:active {
-    a {
-      color: var(--background1-main);
-    }
-  }
+
   &:hover,
   :focus-visible {
-    background: var(--background-blur2);
+    color: var(--background-secondary1);
   }
 
   span {
@@ -55,21 +47,21 @@ export const DirButton = styled.button`
     position: absolute;
     content: '';
 
-    background: var(--background-secondary1);
+    background: var(--background-blur1);
     width: 10%;
     aspect-ratio: 1;
     border-radius: 50%;
     inset: 0;
     margin: auto;
     z-index: -1;
-    transition: transform 1000ms 200ms, opacity 200ms;
+    transition: transform 600ms 200ms, opacity 200ms;
     opacity: 0;
   }
 
   &:active:before {
     transform: scale(20);
     opacity: 0.7;
-    transition: transform 1000ms, opacity 500ms;
+    transition: transform 600ms, opacity 500ms;
   }
 
   &:has(span:first-of-type:hover) {
@@ -85,6 +77,6 @@ export const DirButton = styled.button`
 
   &:has(span:first-of-type:hover):before,
   &:has(span:last-of-type:hover):before {
-    transition: transform 500ms, opacity 250ms;
+    transition: transform 300ms, opacity 250ms;
   }
 `

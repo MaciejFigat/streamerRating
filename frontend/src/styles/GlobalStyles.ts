@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
 
       }
   }
-   :root{
+   :root {
      margin: 0 auto;
      
      /* --background1-main: #0C0D0F;  */
@@ -92,8 +92,6 @@ const GlobalStyle = createGlobalStyle`
      --background-blur3: rgba( 200, 198, 198, 0.45 );
 
     
-
-
     --border-radius0: 4px;
     --border-radius1: 8px;
     --border-radius2: 16px;
@@ -128,65 +126,10 @@ const GlobalStyle = createGlobalStyle`
     --transition-one: 0.1s;
     --transition-two: 0.2s;
     --transition-three: 0.3s;
-
-    --background-gradient0: linear-gradient(
-    120deg,
-    var(--background-blur1) 0%,
-    transparent 30%,
-    transparent 70%,
-    var(--background-blur1)
-  );
-
-    --background-gradient1: linear-gradient(
-      120deg,
-      var(--background-blur3) 0%,
-      transparent 30%,
-      transparent 70%,
-      var(--background-blur2)
-    );
-  --background-gradient3: linear-gradient(
-      110deg,
-      var(--background-blur0) 0%,
-      var(--background3-main) 30%,
-      var(--background3-main) 90%,
-      var(--background-blur0)
-    );
-  --background-gradient4: linear-gradient(
-      120deg,
-      var(--background-blur1) 0%,
-      transparent 20%,
-      transparent 80%,
-      var(--background-blur1)
-    );
-
-    
-    --background-gradient2: linear-gradient(to bottom, #50abdf, #1f78aa);
-
-
-    @media (max-width: 1220px) {
-   
-  } 
-    @media (max-width: 1040px) {
-    /* display: none; */
-  }       
-  @media (max-width: 1020px) {
-    /* display: none; */
-  }
-  @media (max-width: 760px) {
-    /* display: none; */
-  }
-
-  @media (max-width: 610px) {
  
-  }
-  @media (max-width: 360px) {
- 
-  }
-  @media (max-width: 340px) {
- 
-  }
-   
-  @media screen and (max-width: 1300px) and (min-width: 1040px) {}
+
+
+
 `
 
 export { GlobalStyle }
