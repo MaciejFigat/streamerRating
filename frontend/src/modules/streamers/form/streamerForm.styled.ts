@@ -58,11 +58,19 @@ export const InputsWrapper = styled.div`
     border-bottom: 1px solid var(--background-blur1);
   }
 `
-export const FormLabel = styled.label`
+export const FormLabel = styled.label<{
+  $hasError?: boolean
+  $isApproved?: boolean
+}>`
   margin-bottom: var(--gap-small);
   width: 100%;
   text-transform: uppercase;
-
+  color: ${({ $hasError, $isApproved }) =>
+    $hasError
+      ? 'var(--danger2)'
+      : $isApproved
+      ? 'var(--success2)'
+      : 'var(--background4-main)'};
   font-size: var(--font-size-verySmall);
   padding: 16px 16px 0;
 `

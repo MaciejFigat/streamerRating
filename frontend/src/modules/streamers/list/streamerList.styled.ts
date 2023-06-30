@@ -139,23 +139,14 @@ export const ListItemNav = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   font-size: 1.05rem;
   letter-spacing: 0.075em;
   font-weight: 700;
   text-transform: uppercase;
-
-  @media (max-width: 1020px) {
-    flex-direction: column;
-    align-content: flex-start;
-    font-size: 1.15rem;
-    margin-right: 0.25rem;
-    margin-left: 1.25rem;
-  }
-  @media (max-width: 620px) {
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
-  }
+`
+export const UrlButtonPadding = styled.div`
+  padding: 0.5rem;
 `
 export const DropDownHeaderMisc = styled.div`
   display: flex;
@@ -165,15 +156,17 @@ export const DropDownHeaderMisc = styled.div`
   user-select: none;
   height: 34px;
   border-radius: var(--border-radius2);
-  width: 150px;
+  width: 130px;
   border: 1px solid var(--background-blur1);
-  padding: 0.2rem 0.4rem 0.2rem 0.5rem;
+  padding: 0.4rem 0.4rem 0.2rem 0.4rem;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: var(--font-size-small-plus);
+
   color: var(--background4-main);
   background: var(--background1-main);
   transition: all 0.3s ease-out;
   text-align: center;
+
   &:hover {
     color: var(--background4-main);
     border-color: var(--background-secondary1);

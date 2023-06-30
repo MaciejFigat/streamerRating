@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-export const DirButton = styled.button`
+export const DirButton = styled.button<{ $isDisabled?: boolean }>`
   position: relative;
   border: 1px solid var(--background-blur1);
-  color: var(--background4-main);
+
+  color: ${({ $isDisabled }) =>
+    $isDisabled ? 'var(--background-blur2)' : 'var(--background4-main)'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +26,8 @@ export const DirButton = styled.button`
 
   &:hover,
   :focus-visible {
-    color: var(--background-secondary1);
+    color: ${({ $isDisabled }) =>
+      $isDisabled ? 'var(--background-blur2)' : 'var(--background-secondary1)'};
   }
 
   span {

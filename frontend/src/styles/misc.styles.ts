@@ -227,10 +227,17 @@ export const HighlightText = styled.b<HighlightTextProps>`
   display: flex;
   align-items: center;
   color: ${({ color }) => getColor(color)};
+  svg {
+    color: ${({ color }) => getColor(color)};
+  }
   transition: all 0.2s ease-in-out;
   &:hover {
     color: ${({ color, hoverEffect }) =>
       hoverEffect ? getAccentColor(color) : null};
+    svg {
+      color: ${({ color, hoverEffect }) =>
+        hoverEffect ? getAccentColor(color) : null};
+    }
   }
 `
 
@@ -285,6 +292,7 @@ interface HoverColorWrapperProps extends TextProps {
 //     left: -12px;
 //   }
 // `
+
 export const HomeTitle = styled.h1`
   font-weight: 700;
   font-size: var(--font-size-bigger);

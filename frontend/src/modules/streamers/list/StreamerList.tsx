@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import socketIOClient from 'socket.io-client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import {
   ListItem,
   ListContentWrapper,
@@ -116,7 +118,7 @@ const StreamerList: React.FC = () => {
                         voteHandler(streamer._id ?? '', VoteType.UPVOTE)
                       }
                     >
-                      U
+                      <FontAwesomeIcon icon={faArrowUp} />
                     </VoteButton>
                     &nbsp;{streamer.upvotes}
                   </HighlightText>
@@ -129,7 +131,7 @@ const StreamerList: React.FC = () => {
                         voteHandler(streamer._id ?? '', VoteType.DOWNVOTE)
                       }
                     >
-                      D
+                      <FontAwesomeIcon icon={faArrowDown} />
                     </VoteButton>
                     &nbsp;{streamer.downvotes}
                   </HighlightText>
