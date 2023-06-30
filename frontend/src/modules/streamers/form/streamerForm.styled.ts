@@ -6,10 +6,11 @@ export const FormWrapper = styled.div`
   border: 1px solid var(--background-blur1);
 
   width: 520px;
-  height: 690px;
+  height: 590px;
   padding: var(--gap-huge);
   border-radius: 10px;
-  /* background: var(--background-gradient1); */
+
+  margin-top: 1rem;
   @media screen and (max-width: 960px) {
     max-width: 100%;
     width: 100%;
@@ -18,8 +19,12 @@ export const FormWrapper = styled.div`
   }
 `
 export const FormTitleHeader = styled.h3`
+  margin: 1rem 0 0;
+
+  font-weight: 700;
   font-size: var(--font-size-bigger);
-  font-weight: 400;
+  font-size: 2rem;
+  font-family: 'Yeseva One', cursive;
 `
 export const Form = styled.form`
   margin: 0 auto;
@@ -122,4 +127,14 @@ export const FormSelect = styled.select`
 export const FormSelectOption = styled.option`
   color: var(--background4-main);
   background-color: var(--background1-main);
+`
+export const SettingsWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  border-radius: var(--border-radius1);
+  border: 1px solid var(--background-blur1);
+  padding: var(--padding-medium);
+
+  flex: 1;
+  margin: 1rem 0;
 `

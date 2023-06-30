@@ -10,8 +10,12 @@ export const ListWrapper = styled(motion.div)`
   align-items: center;
   justify-content: center;
 `
-export const ListItem = styled(motion.div)<{ $isActive: boolean }>`
+export const ListItem = styled(motion.div)<{
+  $isActive: boolean
+  $hasError?: boolean
+}>`
   display: grid;
+
   place-items: space-around;
   min-height: fit-content;
   min-width: 318px;
@@ -21,7 +25,8 @@ export const ListItem = styled(motion.div)<{ $isActive: boolean }>`
   border-radius: var(--border-radius1);
   border: 1px solid
     ${({ $isActive }) =>
-      $isActive ? 'var(--success2)' : 'var(--background-blur2)'};
+      $isActive ? 'var(--background3-main)' : 'var(--background-blur2)'};
+  border-color: ${({ $hasError }) => $hasError && 'var(--danger1)'};
 `
 export const ListContentWrapper = styled.div`
   display: flex;
@@ -30,16 +35,46 @@ export const ListContentWrapper = styled.div`
   justify-content: flex-end;
   gap: var(--gap-big);
 `
-export const StreamerColumnWrapper = styled.div`
+export const ColumnFadeout = styled.div`
+  position: sticky;
+  top: 0px;
+  height: 1rem;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--background1-main) 0%,
+    transparent 100%
+  );
+  opacity: 0.8;
+`
+export const ColumnFadeoutBottom = styled(ColumnFadeout)`
+  bottom: 0px;
+  background: linear-gradient(
+    180deg,
+    transparent 10%,
+    var(--background1-main) 100%
+  );
+`
+export const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;\
-  grid-auto-rows: 130px; 
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 130px;
   gap: 0.85rem;
-  padding: 0rem 1.25rem;
-  height: 100vh;
+`
+export const StreamerWrapper = styled.div`
+  position: relative;
+  display: grid;
+
+  padding: 0rem 1.25rem 0rem;
   overflow-y: scroll;
+  &:nth-child(6) {
+    grid-column: span 2;
+  }
+  &:last-child {
+    grid-column: span 2;
+  }
   ::-webkit-scrollbar {
-    width: 0.75em;
+    width: 0.5em;
     margin: -0.3em;
     background: transparent;
     @media screen and (max-width: 1020px) {
@@ -52,8 +87,12 @@ export const StreamerColumnWrapper = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--background-blur2);
-
+    background: linear-gradient(
+      to bottom,
+      var(--background1-main),
+      var(--background3-main),
+      var(--background1-main)
+    );
     border-radius: 2px;
   }
   ::-webkit-scrollbar-track {

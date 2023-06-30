@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { createStreamer } from '../../../reduxState/stateSlices/streamer/streamerSlice'
 import { useAppDispatch, useAppSelector } from '../../../reduxState/reduxHooks'
 import { TPlatform, TextColor } from '../../../consts'
-import { HighlightText, HorizontalWrapper } from '../../../styles/misc.styles'
+import {
+  HighlightText,
+  HomeTitle,
+  HorizontalWrapper,
+  RowWrapper
+} from '../../../styles/misc.styles'
 import {
   FormWrapper,
   FormTitleHeader,
@@ -12,7 +17,8 @@ import {
   Input,
   TextArea,
   FormSelect,
-  FormSelectOption
+  FormSelectOption,
+  SettingsWrapper
 } from './streamerForm.styled'
 import DirectionalButton from '../../../components/DirectionalButton/DirectionalButton'
 import { IStreamer } from '../../../interfaces'
@@ -52,67 +58,73 @@ const StreamerForm: React.FC = () => {
   }
 
   return (
-    <FormWrapper>
-      <FormTitleHeader>Create Streamer </FormTitleHeader>
-      {status === 'loading' ? (
-        <HorizontalWrapper>
-          <HighlightText color={TextColor.INFO}>Loading...</HighlightText>
-        </HorizontalWrapper>
-      ) : (
-        <></>
-      )}
-      {error ? (
+    <RowWrapper>
+      <FormWrapper>
+        <FormTitleHeader>Create & Vote </FormTitleHeader>
         <HorizontalWrapper>
           {' '}
-          <HighlightText color={TextColor.DANGER}>Error: {error}</HighlightText>
+          <HomeTitle>Streamer Rank</HomeTitle>
         </HorizontalWrapper>
-      ) : (
-        <></>
-      )}
-      <Form onSubmit={handleSubmit}>
-        <InputsWrapper>
-          <FormLabel htmlFor='name'>Name:</FormLabel>
-          <Input
-            type='text'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </InputsWrapper>
-        <InputsWrapper>
-          <FormLabel htmlFor='pictureUrl'>Picture URL:</FormLabel>
-          <Input
-            type='text'
-            name='pictureUrl'
-            value={formData.pictureUrl}
-            onChange={handleChange}
-          />
-        </InputsWrapper>
-        <InputsWrapper>
-          <FormLabel htmlFor='description'>Description:</FormLabel>
-          <TextArea
-            name='description'
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </InputsWrapper>{' '}
-        <HorizontalWrapper>
-          <FormLabel>Platform:</FormLabel>
-          <FormSelect
-            name='platform'
-            value={formData.platform}
-            onChange={handleChange}
-          >
-            {Object.values(TPlatform).map(platform => (
-              <FormSelectOption key={platform} value={platform}>
-                {platform}
-              </FormSelectOption>
-            ))}
-          </FormSelect>
-        </HorizontalWrapper>
-        <DirectionalButton>Create Streamer</DirectionalButton>
-      </Form>
-    </FormWrapper>
+        <Form onSubmit={handleSubmit}>
+          <InputsWrapper>
+            <FormLabel htmlFor='name'>Name:</FormLabel>
+            <Input
+              type='text'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </InputsWrapper>
+          <InputsWrapper>
+            <FormLabel htmlFor='pictureUrl'>Picture URL:</FormLabel>
+            <Input
+              type='text'
+              name='pictureUrl'
+              value={formData.pictureUrl}
+              onChange={handleChange}
+            />
+          </InputsWrapper>
+          <InputsWrapper>
+            <FormLabel htmlFor='description'>Description:</FormLabel>
+            <TextArea
+              name='description'
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </InputsWrapper>{' '}
+          <HorizontalWrapper>
+            <FormLabel>Platform:</FormLabel>
+            <FormSelect
+              name='platform'
+              value={formData.platform}
+              onChange={handleChange}
+            >
+              {Object.values(TPlatform).map(platform => (
+                <FormSelectOption key={platform} value={platform}>
+                  {platform}
+                </FormSelectOption>
+              ))}
+            </FormSelect>
+          </HorizontalWrapper>
+          <DirectionalButton>Create Streamer</DirectionalButton>
+        </Form>
+      </FormWrapper>
+      <SettingsWrapper>
+        {status === 'loading' ? (
+          <HorizontalWrapper>
+            <HighlightText color={TextColor.INFO}>Loading...</HighlightText>
+          </HorizontalWrapper>
+        ) : null}
+        {error ? (
+          <HorizontalWrapper>
+            {' '}
+            <HighlightText color={TextColor.DANGER}>
+              Error: {error}
+            </HighlightText>
+          </HorizontalWrapper>
+        ) : null}
+      </SettingsWrapper>
+    </RowWrapper>
   )
 }
 

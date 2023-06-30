@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
+import '@fontsource-variable/josefin-sans'
+import '@fontsource/yeseva-one'
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -22,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
       height: 100%;
       overflow-wrap: break-word;
       background: var(--background1-main);
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Josefin Sans Variable', sans-serif;
     
     a {
         text-decoration: none;
@@ -39,27 +41,25 @@ const GlobalStyle = createGlobalStyle`
    :root {
      margin: 0 auto;
      
-     /* --background1-main: #0C0D0F;  */
-     /* --background2-main: #14171A;  */
-     /* --background3-main: #21272B;  */
-     /* --background4-main: #F0F3F8;  */
-     /* --background5-main: #38ADFF;  */
-     --background0-main: #162740; 
-     --background1-main: #1d0a26; 
-     --background2-main: #302c3a; 
-     /* --background3-main: #4c1d95;  */
+
+     --background0-main: #100524; 
+     --background1-main: rgb(13, 2, 37); 
+     --background2-main: #092D50; 
+     --background2-main: #1d0a26; 
      --background3-main: #6d28d9; 
      --background4-main: #fff; 
-     --background5-main: #ddd6fe; 
+     --background5-main: #E300AB; 
      
-     --background-secondary1: #43ADFF; 
-     --background-secondary2: #6696F2; 
+
+     --background-secondary1: rgb(235, 255, 94); 
+     --background-secondary2: rgb(114, 228, 252); 
+    
      --background-secondary3: #837DDE;
      --background-secondary4: #9A62C2;
      --background-secondary5: #A943A0;
      --background-secondary6: #AE1D78;
      
-     --success1: #00bc8c; 
+     --success1: #00B897; 
      --success2: #6FCD84; 
      --success3: #AADC81; 
      --success4: #104002;

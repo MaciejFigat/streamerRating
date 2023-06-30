@@ -4,7 +4,6 @@ import { TextColor } from '../consts'
 export const CenterWrapper = styled.div`
   display: grid;
   place-items: center;
-  /* padding: 4rem 0; */
 `
 export const GridWrapper = styled.div`
   display: flex;
@@ -12,13 +11,8 @@ export const GridWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  min-height: 100%;
+  max-width: 1600px;
   margin: 0px;
-  max-width: 1400px;
-  overflow: hidden;
-  @media (max-width: 1040px) {
-    display: none;
-  }
 `
 
 export const HorizontalWrapper = styled.div`
@@ -62,18 +56,31 @@ export const RelativeWrapper = styled.div<{ top?: string; left?: string }>`
 export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 2rem;
+  padding: 0 1rem;
+  background: transparent;
+
+  background: linear-gradient(
+    to bottom,
+    var(--background0-main) 0%,
+    transparent 12%,
+    transparent 88%,
+    var(--background0-main) 100%
+  );
+
+  border: 1px solid var(--background3-main);
+  max-height: 90vh;
+
+  border-radius: var(--border-radius2);
+`
+export const RowWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 export const GeneralWrapper = styled.div`
   display: grid;
   place-items: center;
   width: 100%;
-
   height: 100vh;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    width: 0.2em;
-  }
 `
 export const FlexStartWrapperOnly = styled.div`
   display: flex;
@@ -85,6 +92,7 @@ export const FlexStartWrapperOnly = styled.div`
 export const FlexEndWrapperOnly = styled(FlexStartWrapperOnly)`
   justify-content: flex-end;
 `
+
 export const FlexStartWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -277,3 +285,9 @@ interface HoverColorWrapperProps extends TextProps {
 //     left: -12px;
 //   }
 // `
+export const HomeTitle = styled.h1`
+  font-weight: 700;
+  font-size: var(--font-size-bigger);
+  font-size: var(--font-size-big);
+  font-family: 'Yeseva One', cursive;
+`

@@ -13,6 +13,7 @@ const HomeScreen: React.FC = () => {
       <GridWrapper>
         <ColumnWrapper>
           <StreamerForm />
+
           <StreamerList />
         </ColumnWrapper>
       </GridWrapper>
