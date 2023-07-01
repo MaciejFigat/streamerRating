@@ -1,5 +1,5 @@
 import mongoose, { Connection } from 'mongoose'
-// import colors from 'colors'
+import colors from 'colors'
 
 const connectDB = async (): Promise<Connection> => {
   const uri = process.env.MONGO_URI as string
@@ -11,15 +11,15 @@ const connectDB = async (): Promise<Connection> => {
   try {
     const conn = await mongoose.connect(uri)
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline)
+    console.log(
+      colors.cyan.underline(`MongoDB Connected: ${conn.connection.host}`)
+    )
     return conn.connection
   } catch (error) {
     if (error instanceof Error) {
-      console.error(`Error: ${error.message}`.bgRed.bold)
-      console.log('NODE_ENV', process.env.NODE_ENV)
-      console.log('uri', uri)
+      console.error(colors.bgRed.bold(`Error: ${error.message}`))
     } else {
-      console.error(`Unknown error occurred: ${error}`.bgRed.bold)
+      console.error(colors.bgRed.bold(`Unknown error occurred: ${error}`))
       console.log('NODE_ENV', process.env.NODE_ENV)
     }
     process.exit(1)
