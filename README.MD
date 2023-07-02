@@ -55,6 +55,7 @@ You will need to create a database in [MongoDB Atlas](https://www.mongodb.com/cl
 - [x] error boundaries for frontend elements
 - [x] 404 custom page
 - [x] backend tests
+- [o] frontend: responsiveness for smaller resolutions and mobile
 - [o] frontend tests - todo: vitest for async redux-toolkit thunks
 - [o] frontend: first paint with no users yet created/fetched, some misc fetches that are not needed  
 
