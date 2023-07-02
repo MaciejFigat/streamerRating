@@ -5,7 +5,7 @@ const proxyTarget = isProduction
   ? 'https://streamerratebe.onrender.com/'
   : 'http://localhost:5000'
 const ioTarget = isProduction
-  ? 'streamerrate.netlify.app/'
+  ? 'https://streamerrate.netlify.app/'
   : 'ws://localhost:5174'
 
 // https://vitejs.dev/config/
