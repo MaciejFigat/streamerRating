@@ -34,6 +34,17 @@ server
 `cd backend`  
 `npm run server`  
 
+### env variables needed to run the app locally
+- please create .env in /frontend 
+save those two: 
+```VITE_ENDPOINT = 'http://localhost:5000'```
+```VITE_NODE_ENV = 'development'```
+
+- please create .env in /backend 
+```MONGO_URI = <your mongo uri>```
+```NODE_ENV = development``` 
+```PORT = 5000```
+You will need to create a database in [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and get the URI from there. 
 
 ### Features and todo (ie. features not finished)
 
