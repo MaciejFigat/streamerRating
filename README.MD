@@ -44,6 +44,7 @@ server
 - [x] error boundaries for 
 - [x] backend tests
 - [o] frontend tests - todo: vitest for async redux-toolkit thunks
+- [o] frontend: first paint with no users yet created/fetched, some misc fetches that are not needed 
 
 ### Built With
 - Vite 
@@ -52,6 +53,8 @@ server
 - Express
 - MongoDB
 - Mongoose
+
+### Miscellaneous
 
 **mocking userId**
 userId is generated with nanoid(), stored in redux state for mocking a user id.
@@ -62,7 +65,6 @@ This id will persist as long as the user doesn't refresh the page, a new id will
 
 **note about URL input**
 This URL is used for an img tag's src attribute. Any JavaScript embedded in the URL will not execute. Browsers prevent JavaScript execution in this context to prevent cross-site scripting (XSS) attacks.
-
 
 
 **Backend testing** 
@@ -82,3 +84,9 @@ TODO: testSetup that uses serverStarter
 TODO: Vitest for the future of testing redux-toolkit thunks
 * I have yet to find a reliable way of using jest with vite
 * no testing 
+
+
+## Contact me 
+
+If you have any questions or suggestions, feel free to contact me at:
+[LinkedIn](https://www.linkedin.com/in/maciej-figat/)
