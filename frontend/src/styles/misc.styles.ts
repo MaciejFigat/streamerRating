@@ -241,12 +241,12 @@ export const HighlightText = styled.b<HighlightTextProps>`
   }
 `
 
-interface HoverColorWrapperProps extends TextProps {
-  contentAfter?: string
-  contentWidth?: string
-  contentTop?: string
-  contentLeft?: string
-}
+// interface HoverColorWrapperProps extends TextProps {
+//   contentAfter?: string
+//   contentWidth?: string
+//   contentTop?: string
+//   contentLeft?: string
+// }
 // export const HoverColorWrapper = styled.div<HoverColorWrapperProps>`
 //   cursor: pointer;
 //   transition: all 0.2s ease-in-out;

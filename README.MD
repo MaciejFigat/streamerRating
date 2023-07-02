@@ -10,6 +10,7 @@ This id will persist as long as the user doesn't refresh the page, a new id will
 This URL is used for an img tag's src attribute. Any JavaScript embedded in the URL will not execute. Browsers prevent JavaScript execution in this context to prevent cross-site scripting (XSS) attacks.
 
 
+
 **Backend testing** 
 examples of testing approach
 Integration Tests: PUT /streamers/:streamerId/vote
@@ -22,3 +23,8 @@ This test verifies the behavior of the event emission functionality independentl
 TODO: testSetup that uses serverStarter
 * get it working so I can set up sockets for testing in different cases
 
+**Frontend testing - no testing for now** 
+
+TODO: Vitest for the future of testing redux-toolkit thunks
+* I have yet to find a reliable way of using jest with vite
+* no testing 
