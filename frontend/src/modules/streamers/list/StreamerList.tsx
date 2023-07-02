@@ -48,8 +48,12 @@ const StreamerList: React.FC = () => {
   }
 
   useEffect(() => {
-    const ENDPOINT = import.meta.env.VITE_ENDPOINT
+    const isProduction = import.meta.env.VITE_NODE_ENV === 'production'
+    const ENDPOINT = isProduction
+      ? import.meta.env.VITE_PRODUCTION_ENDPOINT
+      : import.meta.env.VITE_ENDPOINT
     const socket = socketIOClient(ENDPOINT)
+
     socket.on('connect', () => {
       console.log('Connected to server')
     })
@@ -75,8 +79,8 @@ const StreamerList: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchAllStreamers())
-  }, [dispatch])
+    if (streamers.length) dispatch(fetchAllStreamers())
+  }, [dispatch, streamers.length])
 
   //* Mock userID
   useEffect(() => {
