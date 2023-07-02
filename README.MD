@@ -42,6 +42,7 @@ server
 - [x] streamer objects get req functionality
 - [x] live updates thanks to websockets
 - [x] error boundaries for frontend elements
+- [x] 404 custom page
 - [x] backend tests
 - [o] frontend tests - todo: vitest for async redux-toolkit thunks
 - [o] frontend: first paint with no users yet created/fetched, some misc fetches that are not needed  
