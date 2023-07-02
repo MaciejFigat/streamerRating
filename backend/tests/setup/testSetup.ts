@@ -10,8 +10,8 @@ export const setup = async (port: number, ioPort: number) => {
   serverInstance = startServer(port, ioPort)
 }
 
-export const teardown = async (done: () => void) => {
+export const teardown = async () => {
   await closeTestDB()
   serverInstance?.io.close()
-  serverInstance?.httpServer.close(done)
+  serverInstance?.httpServer.close()
 }

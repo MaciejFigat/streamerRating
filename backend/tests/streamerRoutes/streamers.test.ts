@@ -8,11 +8,11 @@ import { Types } from 'mongoose'
 let streamerTestId: Types.ObjectId | null = null
 
 beforeAll(async () => {
-  await setup(3002, 3003)
+  await setup(5001, 3003)
 })
 
-afterAll(done => {
-  teardown(done)
+afterAll(() => {
+  teardown()
 }, 3000)
 
 describe('GET /', () => {

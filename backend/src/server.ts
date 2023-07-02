@@ -59,13 +59,15 @@ app.use(
   }
 )
 
-httpServer.listen(PORT, () => {
-  console.log(
-    colors.yellow.bgCyan.bold(
-      `Server is running in ${process.env.NODE_ENV} mode on port ${PORT} ${process.env.NODE_ENV}`
+if (process.env.NODE_ENV !== 'test') {
+  httpServer.listen(PORT, () => {
+    console.log(
+      colors.yellow.bgCyan.bold(
+        `Server is running in ${process.env.NODE_ENV} mode on port ${PORT} ${process.env.NODE_ENV}`
+      )
     )
-  )
-})
+  })
+}
 
 io.on('connection', socket => {
   console.log('New client connected')
