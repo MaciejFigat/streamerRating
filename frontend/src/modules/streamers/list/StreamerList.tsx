@@ -79,7 +79,8 @@ const StreamerList: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (streamers.length) dispatch(fetchAllStreamers())
+    // if (streamers.length) dispatch(fetchAllStreamers())
+    dispatch(fetchAllStreamers())
   }, [dispatch, streamers.length])
 
   //* Mock userID

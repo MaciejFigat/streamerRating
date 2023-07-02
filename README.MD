@@ -1,3 +1,41 @@
+<div align="center">
+ 
+  <h3 align="center">Dare to be great!</h3>
+
+  <p align="center">
+    home task for DareDrop
+    <br />
+    <br />
+    <a href="https://streamerrate.netlify.app/">Live version</a> 
+    &#9898;
+    <a href="https://streamerratebe.onrender.com/">Backend deploy</a> 
+    &#9898;
+    <a href="https://github.com/MaciejFigat/streamerRating">FE and BE repository</a>
+    &#9898;
+  </p>
+</div>
+
+## About the Project
+
+This is a proof of concept full stack application, made for recruitment purposes [DareDrop](https://daredrop.com/).
+
+### Features and todo (ie. features not finished)
+
+- [x] streamer object post req functionality
+- [x] streamer object put req functionality
+- [x] streamer objects get req functionality
+- [x] live updates thanks to websockets
+- [x] error boundaries for 
+- [x] backend tests
+- [o] frontend tests - todo: vitest for async redux-toolkit thunks
+
+### Built With
+- Vite 
+- redux-toolkit 
+- socket.io
+- Express
+- MongoDB
+- Mongoose
 
 **mocking userId**
 userId is generated with nanoid(), stored in redux state for mocking a user id.
