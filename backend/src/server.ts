@@ -1,11 +1,11 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from '../config/db'
-import { connectTestDB } from '../config/testDb'
 import { initRoutes } from '../routes/streamerRoutes'
 import colors from 'colors'
 import cors from 'cors'
-import { startServer } from './serverStarter'
+import { Server } from 'socket.io'
+import http from 'http'
 
 // Connect to MongoDB
 dotenv.config()
@@ -18,22 +18,23 @@ if (
 }
 
 const app = express()
-
-const PORT = process.env.PORT || 3000
-
-const ioPort = 3001
-const { io } = startServer(PORT, ioPort)
-
+app.use(cors())
 app.use(express.json())
 
-app.use('/streamers', initRoutes(io))
+const PORT = process.env.PORT || 5000
 
-app.use(cors())
+const httpServer = http.createServer(app)
+const io = new Server(httpServer, {
+  cors: {
+    origin: '*'
+  }
+})
+
+app.use('/streamers', initRoutes(io))
 
 if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.send(colors.yellow.underline('API is running in production mode'))
-    console.log('production')
   })
 } else if (process.env.NODE_ENV === 'development') {
   app.get('/', (req, res) => {
@@ -46,5 +47,29 @@ if (process.env.NODE_ENV === 'production') {
     console.log(colors.green.underline('API is running in test mode'))
   })
 }
+app.use(
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+  }
+)
+
+httpServer.listen(PORT, () => {
+  console.log(
+    colors.yellow.bgCyan.bold(
+      `Server is running in ${process.env.NODE_ENV} mode on port ${PORT} ${process.env.NODE_ENV}`
+    )
+  )
+})
+
+io.on('connection', socket => {
+  console.log('New client connected')
+  socket.on('disconnect', () => console.log('Client disconnected'))
+})
 
 export default app

@@ -48,7 +48,6 @@ const StreamerForm: React.FC = () => {
 
   const userId = useAppSelector(state => state.user.userId)
 
-  //   https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png
   const dispatch = useAppDispatch()
   const streamer = useAppSelector(state => state.streamerState)
   const { status, error } = streamer
@@ -56,6 +55,15 @@ const StreamerForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     dispatch(createStreamer({ ...formData, createdBy: userId }))
+    setFormData({
+      name: '',
+      pictureUrl: '',
+      platform: TPlatform.TWITCH,
+      description: ''
+    })
+    setNameError(null)
+    setDescriptionError(null)
+    setUrlError(null)
   }
 
   const handleChange = (
