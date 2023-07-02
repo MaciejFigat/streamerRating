@@ -17,7 +17,7 @@
 
 ## About the Project
 
-This is a proof of concept full stack application, made for recruitment purposes [DareDrop](https://daredrop.com/).
+This is a proof of concept full stack application, made for recruitment purposes for [DareDrop](https://daredrop.com/).
 
 ### Installation 
 
@@ -41,10 +41,10 @@ server
 - [x] streamer object put req functionality
 - [x] streamer objects get req functionality
 - [x] live updates thanks to websockets
-- [x] error boundaries for 
+- [x] error boundaries for frontend elements
 - [x] backend tests
 - [o] frontend tests - todo: vitest for async redux-toolkit thunks
-- [o] frontend: first paint with no users yet created/fetched, some misc fetches that are not needed 
+- [o] frontend: first paint with no users yet created/fetched, some misc fetches that are not needed  
 
 ### Built With
 - Vite 
