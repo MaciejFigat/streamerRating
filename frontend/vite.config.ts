@@ -2,10 +2,10 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 const isProduction = process.env.VITE_NODE_ENV === 'production'
 const proxyTarget = isProduction
-  ? 'https://streamerratebe.onrender.com/'
+  ? process.env.VITE_PRODUCTION_ENDPOINT
   : 'http://localhost:5000'
 const ioTarget = isProduction
-  ? 'https://streamerrate.netlify.app/'
+  ? process.env.VITE_PRODUCTION_IOENDPOINT
   : 'ws://localhost:5174'
 
 // https://vitejs.dev/config/
