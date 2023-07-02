@@ -19,6 +19,22 @@
 
 This is a proof of concept full stack application, made for recruitment purposes [DareDrop](https://daredrop.com/).
 
+### Installation 
+
+`npm install`
+
+### Available Scripts for local usage
+
+client
+`cd frontend`  
+`npm run dev`  
+`npm run test`  
+
+server
+`cd backend`  
+`npm run server`  
+
+
 ### Features and todo (ie. features not finished)
 
 - [x] streamer object post req functionality
